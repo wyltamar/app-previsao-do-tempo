@@ -18,6 +18,20 @@ async function preverTempo() {
         <img src="http://openweathermap.org/img/wn/${dados.weather[0].icon}.png" alt="Ícone do tempo">
         <p class="umidade">Umidade: ${dados.main.humidity}%</p>
         <button class="botao-IA" onclick="respostaIA()">Sugestão de Roupa</button>
-        <p class="resposta-IA">REsposta da is</p>
+        <p class="resposta-IA"></p>
     `
+}
+
+function transcreverVoz() {
+    const reconhecimentoVoz = new window.webkitSpeechRecognition();
+    reconhecimentoVoz.lang = "pt-BR";
+    reconhecimentoVoz.start();
+
+    reconhecimentoVoz.onresult = function (evento) {
+        const textoTranscrito = evento.results[0][0].transcript;
+        document.querySelector(".input-cidade").value = textoTranscrito;
+
+        preverTempo();
+    }
+
 }
