@@ -58,16 +58,43 @@ body{
 
 .caixa-media{
     color: #fff;
-    font-weight: bold;
+    
 }
 
 .cidade{
-    font-size: 30px;
-    margin-top: 20px;
+    font-size: 28px;
+    margin-top: 10px;
+    
 }
 
 .temperatura{
     
     margin-top: 10px;
     margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 30px;
+    
+}
+
+.botao-IA{
+    padding: 10px;
+    border: none;
+    background-color: rgb(27, 27, 134);
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.resposta-IA{
+    font-size: 14px;
+    margin-top: 15px;
+    line-height: 1.5;
+}
+
+.botao-IA:active{
+    transform: scale(0.98);
+    opacity: 0.8;
 }

@@ -14,10 +14,10 @@ async function preverTempo() {
 
     caixaMedia.innerHTML = `
         <h2 class="cidade">${dados.name}</h2>
-        <p class="temperatura">Temperatura: ${Math.floor(dados.main.temp)} °C</p>
+        <p class="temperatura">${Math.floor(dados.main.temp)}°C</p>
         <img src="http://openweathermap.org/img/wn/${dados.weather[0].icon}.png" alt="Ícone do tempo">
-        <p class="umidade">Umidade: ${dados.main.humidity} %</p>
+        <p class="umidade">Umidade: ${dados.main.humidity}%</p>
         <button class="botao-IA" onclick="respostaIA()">Sugestão de Roupa</button>
-        <p class="resposta-IA">Sugestão de roupa</p>
+        <p class="resposta-IA">REsposta da is</p>
     `
 }
