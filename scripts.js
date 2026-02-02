@@ -1,3 +1,5 @@
+const chaveIA = "sua chave_aqui";
+
 async function preverTempo() {
 
     const apiKey = "58c8fa2c58187081b787ed0121d89211"
@@ -17,7 +19,7 @@ async function preverTempo() {
         <p class="temperatura">${Math.floor(dados.main.temp)}°C</p>
         <img src="http://openweathermap.org/img/wn/${dados.weather[0].icon}.png" alt="Ícone do tempo">
         <p class="umidade">Umidade: ${dados.main.humidity}%</p>
-        <button class="botao-IA" onclick="respostaIA()">Sugestão de Roupa</button>
+        <button class="botao-IA" onclick="pedirSugestaoRoupa()">Sugestão de Roupa</button>
         <p class="resposta-IA"></p>
     `
 }
@@ -33,5 +35,39 @@ function transcreverVoz() {
 
         preverTempo();
     }
+
+}
+
+async function pedirSugestaoRoupa(){
+    
+    let temperatura = document.querySelector(".temperatura").textContent
+    let umidade = document.querySelector(".umidade").textContent
+    let cidade = document.querySelector(".cidade").textContent
+
+    const enderecoIA = "https://api.groq.com/openai/v1/chat/completions";
+
+    let resposta = await fetch(enderecoIA, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + chaveIA
+        },
+        body: JSON.stringify({
+
+            "model": "meta-llama/llama-4-maverick-17b-128e-instruct",
+            messages: [
+                {
+                    "role": "user",
+                    "content": `Com base na temperatura de ${temperatura} e umidade de ${umidade} em ${cidade}, 
+                    que roupa você recomendaria para vestir hoje? Explique sua recomendação em poucas palavras.`
+                },
+            ]      
+          })
+    });
+
+
+    let dados = await resposta.json()    
+    let sugestaoRoupa = dados.choices[0].message.content;
+    document.querySelector(".resposta-IA").textContent = sugestaoRoupa;
 
 }
